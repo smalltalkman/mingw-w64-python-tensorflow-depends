@@ -3,19 +3,20 @@
 _realname=grpcio
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python2-${_realname}" "${MINGW_PACKAGE_PREFIX}-python3-${_realname}")
-pkgver=1.18.0
+pkgver=1.21.1
 pkgrel=1
 pkgdesc="HTTP/2-based RPC framework (mingw-w64)"
 arch=('any')
 url="https://grpc.io"
 license=('Apache License 2.0')
-makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
+makedepends=("patch"
+             "${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
 _dtoken=90/2e/f432e69f86961393c22a6c4490aafdbb94533deba33f5ea2d5651770aa21
 _archive=${_realname}-${pkgver}
 source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz
         '0001-setup.py.patch')
-sha256sums=('ABE825AA49E6239D5EDF4E222C44170D2C7F6F4B1FD5286B4756A62D8067E112'
+sha256sums=('FB98DBFEE0D963B49AE5754554028CF62E6BD695F22DE16D242BA9D2F0B7339B'
             '0A308FC0E8E67D73837FD5186CD76B351A09C1D2958C21095B8E467EA2B98AFA')
 _deps2=(six futures enum34)
 _deps3=(six)

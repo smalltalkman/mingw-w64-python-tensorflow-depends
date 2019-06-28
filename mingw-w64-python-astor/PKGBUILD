@@ -3,7 +3,7 @@
 _realname=astor
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python2-${_realname}" "${MINGW_PACKAGE_PREFIX}-python3-${_realname}")
-pkgver=0.7.1
+pkgver=0.8
 pkgrel=1
 pkgdesc="Python AST read/write (mingw-w64)"
 arch=('any')
@@ -13,7 +13,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
 _archive=${_realname}-${pkgver}
 source=(${_archive}.tar.gz::https://github.com/berkerpeksag/astor/archive/${pkgver}.tar.gz)
-sha256sums=('444EBA3E3012AE9BA9276DF02A40BF694B9E68F6A95D36062B71AA26F1F3FF6C')
+sha256sums=('E1161080B18AC49498E9A2FE6D4914072B06312FA4D373C980F61A907D86A00E')
 
 build() {
   cd "${srcdir}"

@@ -3,7 +3,7 @@
 _realname=gast
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python2-${_realname}" "${MINGW_PACKAGE_PREFIX}-python3-${_realname}")
-pkgver=0.2.0
+pkgver=0.2.2
 pkgrel=1
 pkgdesc="A generic AST to represent Python2 and Python3’s Abstract Syntax Tree(AST) (mingw-w64)"
 arch=('any')
@@ -14,7 +14,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
 _dtoken="5c/78/ff794fcae2ce8aa6323e789d1f8b3b7765f601e7702726f430e814822b96"
 _archive=${_realname}-${pkgver}
 source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz)
-sha256sums=('7068908321ECD2774F145193C4B34A11305BD104B4551B09273DFD1D6A374930')
+sha256sums=('FE939DF4583692F0512161EC1C880E0A10E71E6A232DA045AB8EDD3756FBADF0')
 
 build() {
   cd "${srcdir}"
