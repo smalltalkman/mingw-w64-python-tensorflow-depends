@@ -1,0 +1,88 @@
+# Maintainer: gym603 <gui_yuan_miao@163.com>
+
+_realname=grpcio
+pkgbase=mingw-w64-python-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-python2-${_realname}" "${MINGW_PACKAGE_PREFIX}-python3-${_realname}")
+pkgver=1.18.0
+pkgrel=1
+pkgdesc="HTTP/2-based RPC framework (mingw-w64)"
+arch=('any')
+url="https://grpc.io"
+license=('Apache License 2.0')
+makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
+             "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
+_dtoken=90/2e/f432e69f86961393c22a6c4490aafdbb94533deba33f5ea2d5651770aa21
+_archive=${_realname}-${pkgver}
+source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz
+        '0001-setup.py.patch')
+sha256sums=('ABE825AA49E6239D5EDF4E222C44170D2C7F6F4B1FD5286B4756A62D8067E112'
+            '0A308FC0E8E67D73837FD5186CD76B351A09C1D2958C21095B8E467EA2B98AFA')
+_deps2=(six futures enum34)
+_deps3=(six)
+
+# Helper macros to help make tasks easier #
+apply_patch_with_msg() {
+  for _patch in "$@"
+  do
+    msg2 "Applying ${_patch}"
+    patch -Nbp1 -i "${srcdir}/${_patch}"
+  done
+}
+
+prepare() {
+  #rm -rf "${srcdir}/${_archive}.orig"
+  #cp -rp "${srcdir}/${_archive}" "${srcdir}/${_archive}.orig"
+  cd "${srcdir}/${_archive}"
+  apply_patch_with_msg \
+    0001-setup.py.patch
+}
+
+build() {
+  cd "${srcdir}"
+  rm -rf python{2,3}-build
+  for builddir in python{2,3}-build; do
+    msg2 "Building for ${CARCH} ${builddir%-build} ..."
+    cp -r ${_archive} ${builddir}
+    pushd $builddir
+    ${MINGW_PREFIX}/bin/${builddir%-build} setup.py --quiet build
+    popd
+  done
+}
+
+package_python3-grpcio() {
+  depends=("${MINGW_PACKAGE_PREFIX}-python3" "${_deps3[@]/#/${MINGW_PACKAGE_PREFIX}-python3-}")
+
+  local _mingw_prefix=$(cygpath -am ${MINGW_PREFIX})
+
+  cd "${srcdir}/python3-build"
+  MSYS2_ARG_CONV_EXCL="--prefix=;--install-scripts=;--install-platlib=" \
+    ${MINGW_PREFIX}/bin/python3 setup.py --quiet install --prefix=${MINGW_PREFIX} --root="${pkgdir}" -O1
+
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/python3-${_realname}/LICENSE"
+}
+
+package_python2-grpcio() {
+  depends=("${MINGW_PACKAGE_PREFIX}-python2" "${_deps2[@]/#/${MINGW_PACKAGE_PREFIX}-python2-}")
+
+  cd "${srcdir}/python2-build"
+  MSYS2_ARG_CONV_EXCL="--prefix=;--install-scripts=;--install-platlib=" \
+    ${MINGW_PREFIX}/bin/python2 setup.py --quiet install --prefix=${MINGW_PREFIX} --root="${pkgdir}" -O1
+
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/python2-${_realname}/LICENSE"
+}
+
+package_mingw-w64-i686-python2-grpcio() {
+  package_python2-${_realname}
+}
+
+package_mingw-w64-i686-python3-grpcio() {
+  package_python3-${_realname}
+}
+
+package_mingw-w64-x86_64-python2-grpcio() {
+  package_python2-${_realname}
+}
+
+package_mingw-w64-x86_64-python3-grpcio() {
+  package_python3-${_realname}
+}

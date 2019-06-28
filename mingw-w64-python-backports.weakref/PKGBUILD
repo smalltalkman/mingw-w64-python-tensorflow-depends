@@ -1,0 +1,73 @@
+# Maintainer: gym603 <gui_yuan_miao@163.com>
+
+_realname=backports.weakref
+pkgbase=mingw-w64-python-${_realname}
+pkgname=("${MINGW_PACKAGE_PREFIX}-python2-${_realname}" "${MINGW_PACKAGE_PREFIX}-python3-${_realname}")
+pkgver=1.0.post1
+pkgrel=1
+pkgdesc="Backport of new features in Python's weakref module (mingw-w64)"
+arch=('any')
+url="https://github.com/pjdelport/backports.weakref"
+license=('PSF')
+makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools-scm"
+             "${MINGW_PACKAGE_PREFIX}-python2-setuptools-scm")
+_dtoken=12/ab/cf35cf43a4a6215e3255cf2e49c77d5ba1e9c733af2aa3ec1ca9c4d02592
+_archive=${_realname}-${pkgver}
+source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz)
+sha256sums=('BC4170A29915F8B22C9E7C4939701859650F2EB84184AEE80DA329AC0B9825C2')
+
+build() {
+  cd "${srcdir}"
+  rm -rf python{2,3}-build
+  for builddir in python{2,3}-build; do
+    msg2 "Building for ${CARCH} ${builddir%-build} ..."
+    cp -r ${_archive} ${builddir}
+    pushd $builddir
+    ${MINGW_PREFIX}/bin/${builddir%-build} setup.py --quiet build
+    popd
+  done
+}
+
+package_python3-backports.weakref() {
+  depends=("${MINGW_PACKAGE_PREFIX}-python3" "${_deps3[@]/#/${MINGW_PACKAGE_PREFIX}-python3-}")
+
+  local _mingw_prefix=$(cygpath -am ${MINGW_PREFIX})
+
+  cd "${srcdir}/python3-build"
+  MSYS2_ARG_CONV_EXCL="--prefix=;--install-scripts=;--install-platlib=" \
+    ${MINGW_PREFIX}/bin/python3 setup.py --quiet install --prefix=${MINGW_PREFIX} --root="${pkgdir}" -O1
+
+# We don't want the backports namespace in this package.
+  rm "${pkgdir}${MINGW_PREFIX}"/lib/python3.*/site-packages/backports/{__init__.py*,__pycache__/__init__.*.py*}
+
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/python3-${_realname}/LICENSE"
+}
+
+package_python2-backports.weakref() {
+  depends=("${MINGW_PACKAGE_PREFIX}-python2" "${_deps2[@]/#/${MINGW_PACKAGE_PREFIX}-python2-}")
+
+  cd "${srcdir}/python2-build"
+  MSYS2_ARG_CONV_EXCL="--prefix=;--install-scripts=;--install-platlib=" \
+    ${MINGW_PREFIX}/bin/python2 setup.py --quiet install --prefix=${MINGW_PREFIX} --root="${pkgdir}" -O1
+
+# We don't want the backports namespace in this package.
+  rm "${pkgdir}${MINGW_PREFIX}"/lib/python2.*/site-packages/backports/__init__.py*
+
+  install -Dm644 LICENSE "${pkgdir}${MINGW_PREFIX}/share/licenses/python2-${_realname}/LICENSE"
+}
+
+package_mingw-w64-i686-python2-backports.weakref() {
+  package_python2-${_realname}
+}
+
+package_mingw-w64-i686-python3-backports.weakref() {
+  package_python3-${_realname}
+}
+
+package_mingw-w64-x86_64-python2-backports.weakref() {
+  package_python2-${_realname}
+}
+
+package_mingw-w64-x86_64-python3-backports.weakref() {
+  package_python3-${_realname}
+}

@@ -1,0 +1,12 @@
+diff -urN grpcio-1.18.0.orig/setup.py grpcio-1.18.0/setup.py
+--- grpcio-1.18.0.orig/setup.py	2019-02-26 14:16:04.958457100 +0800
++++ grpcio-1.18.0/setup.py	2019-02-26 14:17:44.057125200 +0800
+@@ -166,7 +166,7 @@
+   EXTRA_ENV_LINK_ARGS = ''
+   if "linux" in sys.platform or "darwin" in sys.platform:
+     EXTRA_ENV_LINK_ARGS += ' -lpthread'
+-  elif "win32" in sys.platform and sys.version_info < (3, 5):
++  elif "win32" in sys.platform and sys.version_info < (3, 5) and "mingw" not in sysconfig.get_platform():
+     msvcr = cygwinccompiler.get_msvcr()[0]
+     # TODO(atash) sift through the GCC specs to see if libstdc++ can have any
+     # influence on the linkage outcome on MinGW for non-C++ programs.
