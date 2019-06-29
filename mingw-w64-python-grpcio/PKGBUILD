@@ -12,7 +12,7 @@ license=('Apache License 2.0')
 makedepends=("patch"
              "${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
-_dtoken=90/2e/f432e69f86961393c22a6c4490aafdbb94533deba33f5ea2d5651770aa21
+_dtoken=fb/d5/30bc142a40bb891c28739ec48c99730d20e5fb9cf9637036b4b52f70505b
 _archive=${_realname}-${pkgver}
 source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz
         '0001-setup.py.patch')
