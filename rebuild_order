@@ -1,0 +1,6 @@
+
+mingw-w64-python-astor
+mingw-w64-python-backports.weakref
+mingw-w64-python-gast
+mingw-w64-python-grpcio
+mingw-w64-python-termcolor
