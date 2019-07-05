@@ -3,7 +3,7 @@
 _realname=grpcio
 pkgbase=mingw-w64-python-${_realname}
 pkgname=("${MINGW_PACKAGE_PREFIX}-python2-${_realname}" "${MINGW_PACKAGE_PREFIX}-python3-${_realname}")
-pkgver=1.21.1
+pkgver=1.22.0
 pkgrel=1
 pkgdesc="HTTP/2-based RPC framework (mingw-w64)"
 arch=('any')
@@ -12,11 +12,11 @@ license=('Apache License 2.0')
 makedepends=("patch"
              "${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
-_dtoken=fb/d5/30bc142a40bb891c28739ec48c99730d20e5fb9cf9637036b4b52f70505b
+_dtoken=19/c1/bee35b6efcace3c77cb275c6465ba9e574d01acf9abf785253fdeed526f3
 _archive=${_realname}-${pkgver}
 source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz
         '0001-setup.py.patch')
-sha256sums=('FB98DBFEE0D963B49AE5754554028CF62E6BD695F22DE16D242BA9D2F0B7339B'
+sha256sums=('8805d486c6128cc0fcc8ecf16c4095d99a8693a541ef851429ab334e028a4a97'
             '0A308FC0E8E67D73837FD5186CD76B351A09C1D2958C21095B8E467EA2B98AFA')
 _deps2=(six futures enum34)
 _deps3=(six)
