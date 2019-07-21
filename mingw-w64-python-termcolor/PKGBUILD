@@ -12,8 +12,7 @@ license=('MIT')
 makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
 _dtoken="8a/48/a76be51647d0eb9f10e2a4511bf3ffb8cc1e6b14e9e4fab46173aa79f981"
-_archive=${_realname}-${pkgver}
-source=(${_archive}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_archive}.tar.gz)
+source=(${_realname}-${pkgver}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_realname}-${pkgver}.tar.gz)
 sha256sums=('1D6D69CE66211143803FBC56652B41D73B4A400A2891D7BF7A1CDF4C02DE613B')
 
 build() {
@@ -21,7 +20,7 @@ build() {
   rm -rf python{2,3}-build
   for builddir in python{2,3}-build; do
     msg2 "Building for ${CARCH} ${builddir%-build} ..."
-    cp -r ${_archive} ${builddir}
+    cp -r ${_realname}-${pkgver} ${builddir}
     pushd $builddir
     ${MINGW_PREFIX}/bin/${builddir%-build} setup.py --quiet build
     popd
