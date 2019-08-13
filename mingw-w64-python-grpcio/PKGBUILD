@@ -16,7 +16,7 @@ _dtoken=19/c1/bee35b6efcace3c77cb275c6465ba9e574d01acf9abf785253fdeed526f3
 source=(${_realname}-${pkgver}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_realname}-${pkgver}.tar.gz
         '0001-setup.py.patch')
 sha256sums=('8805d486c6128cc0fcc8ecf16c4095d99a8693a541ef851429ab334e028a4a97'
-            '0A308FC0E8E67D73837FD5186CD76B351A09C1D2958C21095B8E467EA2B98AFA')
+            '0a308fc0e8e67d73837fd5186cd76b351a09c1d2958c21095b8e467ea2b98afa')
 _deps2=(six futures enum34)
 _deps3=(six)
 

@@ -12,7 +12,7 @@ license=('BSD-3-Clause')
 makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
 source=(${_realname}-${pkgver}.tar.gz::https://github.com/berkerpeksag/astor/archive/${pkgver}.tar.gz)
-sha256sums=('E1161080B18AC49498E9A2FE6D4914072B06312FA4D373C980F61A907D86A00E')
+sha256sums=('e1161080b18ac49498e9a2fe6d4914072b06312fa4d373c980f61a907d86a00e')
 
 build() {
   cd "${srcdir}"

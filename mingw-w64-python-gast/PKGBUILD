@@ -13,7 +13,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-python3-setuptools"
              "${MINGW_PACKAGE_PREFIX}-python2-setuptools")
 _dtoken="4e/35/11749bf99b2d4e3cceb4d55ca22590b0d7c2c62b9de38ac4a4a7f4687421"
 source=(${_realname}-${pkgver}.tar.gz::https://files.pythonhosted.org/packages/${_dtoken}/${_realname}-${pkgver}.tar.gz)
-sha256sums=('FE939DF4583692F0512161EC1C880E0A10E71E6A232DA045AB8EDD3756FBADF0')
+sha256sums=('fe939df4583692f0512161ec1c880e0a10e71e6a232da045ab8edd3756fbadf0')
 
 build() {
   cd "${srcdir}"
